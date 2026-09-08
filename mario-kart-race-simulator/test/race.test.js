@@ -123,3 +123,44 @@ describe('Race - CONFRONTO rounds', () => {
     expect(bowser.points).toBe(0);
   });
 });
+
+describe('Race - run() and getResult()', () => {
+  test('run() plays exactly 5 rounds and declares the character with more points as winner', () => {
+    const mario = new Character({ name: 'Mario', speed: 4, handling: 3, power: 3 });
+    const bowser = new Character({ name: 'Bowser', speed: 5, handling: 2, power: 5 });
+    // Force 5 RETA rounds where Mario always wins: roll1=6, roll2=1 each round
+    // Mario: 6 + speed(4) = 10, Bowser: 1 + speed(5) = 6
+    let call = 0;
+    const rolls = [6, 1, 6, 1, 6, 1, 6, 1, 6, 1];
+    const rollDice = () => rolls[call++];
+    const getRandomBlock = () => 'RETA';
+    const race = new Race(mario, bowser, { rollDice, getRandomBlock });
+
+    const result = race.run();
+
+    expect(race.rounds).toHaveLength(5);
+    expect(mario.points).toBe(5);
+    expect(bowser.points).toBe(0);
+    expect(result.winner).toBe(mario);
+    expect(result.character1).toBe(mario);
+    expect(result.character2).toBe(bowser);
+    expect(result.rounds).toHaveLength(5);
+  });
+
+  test('run() declares a tie when points are equal', () => {
+    const mario = new Character({ name: 'Mario', speed: 4, handling: 3, power: 3 });
+    const bowser = new Character({ name: 'Bowser', speed: 5, handling: 2, power: 5 });
+    // Every round ties: roll1=5, roll2=4 -> Mario 5+4=9, Bowser 4+5=9
+    let call = 0;
+    const rolls = [5, 4, 5, 4, 5, 4, 5, 4, 5, 4];
+    const rollDice = () => rolls[call++];
+    const getRandomBlock = () => 'RETA';
+    const race = new Race(mario, bowser, { rollDice, getRandomBlock });
+
+    const result = race.run();
+
+    expect(mario.points).toBe(0);
+    expect(bowser.points).toBe(0);
+    expect(result.winner).toBeNull();
+  });
+});

@@ -37,6 +37,26 @@ class Race {
     return this.resolveSkillTest(round, block, roll1, roll2);
   }
 
+  run() {
+    for (let round = 1; round <= 5; round++) {
+      this.rounds.push(this.playRound(round));
+    }
+    return this.getResult();
+  }
+
+  getResult() {
+    let winner = null;
+    if (this.character1.points > this.character2.points) winner = this.character1;
+    else if (this.character2.points > this.character1.points) winner = this.character2;
+
+    return {
+      character1: this.character1,
+      character2: this.character2,
+      winner,
+      rounds: this.rounds,
+    };
+  }
+
   resolveSkillTest(round, block, roll1, roll2) {
     const attribute = block === 'RETA' ? 'speed' : 'handling';
     const total1 = roll1 + this.character1[attribute];
