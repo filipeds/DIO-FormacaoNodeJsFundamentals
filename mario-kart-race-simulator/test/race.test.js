@@ -61,3 +61,64 @@ describe('Race - RETA/CURVA rounds', () => {
     expect(bowser.points).toBe(0);
   });
 });
+
+const { PENALTIES } = require('../src/race');
+
+describe('Race - CONFRONTO rounds', () => {
+  function makeConfrontoRace(rollSequence, randomSequence) {
+    const mario = new Character({ name: 'Mario', speed: 4, handling: 3, power: 3 });
+    const bowser = new Character({ name: 'Bowser', speed: 5, handling: 2, power: 5 });
+    let rollCall = 0;
+    const rollDice = () => rollSequence[rollCall++];
+    const getRandomBlock = () => 'CONFRONTO';
+    let randomCall = 0;
+    jest.spyOn(Math, 'random').mockImplementation(() => randomSequence[randomCall++]);
+    const race = new Race(mario, bowser, { rollDice, getRandomBlock });
+    return { race, mario, bowser };
+  }
+
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
+  test('confronto winner gets turbo when the random roll favors it, loser gets shell', () => {
+    // Mario: 5 + power(3) = 8, Bowser: 1 + power(5) = 6 -> Mario wins
+    // random[0] < 0.5 -> SHELL penalty for Bowser, random[1] < 0.5 -> turbo awarded to Mario
+    const { race, mario, bowser } = makeConfrontoRace([5, 1], [0.1, 0.1]);
+    const result = race.playRound(1);
+
+    expect(result.winner).toBe(mario);
+    expect(result.loser).toBe(bowser);
+    expect(result.penalty).toBe('SHELL');
+    expect(result.turboAwarded).toBe(true);
+    expect(bowser.points).toBe(0); // was 0, penalty floors at 0
+    expect(mario.points).toBe(1); // turbo point
+  });
+
+  test('confronto loser gets bomb and winner gets no turbo when random rolls are high', () => {
+    const { race, mario, bowser } = makeConfrontoRace([5, 1], [0.9, 0.9]);
+    const result = race.playRound(1);
+
+    expect(result.penalty).toBe('BOMB');
+    expect(result.turboAwarded).toBe(false);
+    expect(mario.points).toBe(0); // no turbo
+  });
+
+  test('confronto penalty never drops points below 0', () => {
+    const { race, mario, bowser } = makeConfrontoRace([5, 1], [0.9, 0.9]);
+    race.playRound(1);
+    expect(bowser.points).toBe(0);
+  });
+
+  test('confronto tie applies no penalty and no turbo', () => {
+    // Mario power(3): roll1=6 -> 9. Bowser power(5): roll2=4 -> 9. Tie.
+    const { race, mario, bowser } = makeConfrontoRace([6, 4], [0.1, 0.1]);
+    const result = race.playRound(1);
+    expect(result.winner).toBeNull();
+    expect(result.loser).toBeNull();
+    expect(result.penalty).toBeNull();
+    expect(result.turboAwarded).toBe(false);
+    expect(mario.points).toBe(0);
+    expect(bowser.points).toBe(0);
+  });
+});

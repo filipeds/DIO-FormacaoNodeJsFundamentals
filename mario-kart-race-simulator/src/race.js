@@ -1,6 +1,8 @@
 const { rollDice } = require('./dice');
 const { getRandomBlock } = require('./track');
 
+const PENALTIES = { SHELL: -1, BOMB: -2 };
+
 class Character {
   constructor({ name, speed, handling, power }) {
     this.name = name;
@@ -28,6 +30,10 @@ class Race {
     const block = this.getRandomBlock();
     const roll1 = this.rollDice();
     const roll2 = this.rollDice();
+
+    if (block === 'CONFRONTO') {
+      return this.resolveConfronto(round, roll1, roll2);
+    }
     return this.resolveSkillTest(round, block, roll1, roll2);
   }
 
@@ -47,6 +53,47 @@ class Race {
 
     return { round, block, roll1, roll2, total1, total2, winner };
   }
+
+  resolveConfronto(round, roll1, roll2) {
+    const total1 = roll1 + this.character1.power;
+    const total2 = roll2 + this.character2.power;
+
+    let winner = null;
+    let loser = null;
+    if (total1 > total2) {
+      winner = this.character1;
+      loser = this.character2;
+    } else if (total2 > total1) {
+      winner = this.character2;
+      loser = this.character1;
+    }
+
+    let penalty = null;
+    let turboAwarded = false;
+
+    if (winner && loser) {
+      penalty = Math.random() < 0.5 ? 'SHELL' : 'BOMB';
+      loser.addPoints(PENALTIES[penalty]);
+
+      turboAwarded = Math.random() < 0.5;
+      if (turboAwarded) {
+        winner.addPoints(1);
+      }
+    }
+
+    return {
+      round,
+      block: 'CONFRONTO',
+      roll1,
+      roll2,
+      total1,
+      total2,
+      winner,
+      loser,
+      penalty,
+      turboAwarded,
+    };
+  }
 }
 
-module.exports = { Character, Race };
+module.exports = { Character, Race, PENALTIES };
