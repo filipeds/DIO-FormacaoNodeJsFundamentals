@@ -61,6 +61,27 @@ class Cart {
     product.stock -= diff;
     this.items.set(productId, quantity);
   }
+
+  getItems() {
+    return Array.from(this.items.entries()).map(([productId, quantity]) => {
+      const product = findProductById(this.products, productId);
+      return {
+        productId,
+        name: product.name,
+        price: product.price,
+        quantity,
+        subtotal: product.price * quantity,
+      };
+    });
+  }
+
+  getTotal() {
+    return this.getItems().reduce((total, item) => total + item.subtotal, 0);
+  }
+
+  getItemCount() {
+    return Array.from(this.items.values()).reduce((count, quantity) => count + quantity, 0);
+  }
 }
 
 module.exports = { Cart };

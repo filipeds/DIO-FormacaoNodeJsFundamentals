@@ -130,3 +130,46 @@ describe('Cart - updateQuantity', () => {
     expect(() => cart.updateQuantity(1, -1)).toThrow();
   });
 });
+
+describe('Cart - getItems/getTotal/getItemCount', () => {
+  test('getItems returns product details with subtotal', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+    cart.addItem(2, 1);
+
+    const items = cart.getItems();
+
+    expect(items).toEqual([
+      { productId: 1, name: 'Produto A', price: 10, quantity: 2, subtotal: 20 },
+      { productId: 2, name: 'Produto B', price: 20, quantity: 1, subtotal: 20 },
+    ]);
+  });
+
+  test('getTotal sums the subtotal of every item', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+    cart.addItem(2, 1);
+
+    expect(cart.getTotal()).toBe(40);
+  });
+
+  test('getItemCount sums the quantity of every item', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+    cart.addItem(2, 1);
+
+    expect(cart.getItemCount()).toBe(3);
+  });
+
+  test('empty cart has total 0 and count 0', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+
+    expect(cart.getItems()).toEqual([]);
+    expect(cart.getTotal()).toBe(0);
+    expect(cart.getItemCount()).toBe(0);
+  });
+});
