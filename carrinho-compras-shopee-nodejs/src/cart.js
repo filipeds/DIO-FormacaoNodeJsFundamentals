@@ -24,6 +24,17 @@ class Cart {
     this.items.set(productId, currentQuantity + quantity);
     product.stock -= quantity;
   }
+
+  removeItem(productId) {
+    const quantity = this.items.get(productId);
+    if (quantity === undefined) {
+      throw new Error(`Produto com id ${productId} não está no carrinho.`);
+    }
+
+    const product = findProductById(this.products, productId);
+    product.stock += quantity;
+    this.items.delete(productId);
+  }
 }
 
 module.exports = { Cart };

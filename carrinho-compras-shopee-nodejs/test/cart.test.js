@@ -51,3 +51,23 @@ describe('Cart - addItem', () => {
     expect(() => cart.addItem(1, quantity)).toThrow();
   });
 });
+
+describe('Cart - removeItem', () => {
+  test('removes the item and returns stock', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+
+    cart.removeItem(1);
+
+    expect(cart.items.has(1)).toBe(false);
+    expect(products[0].stock).toBe(5);
+  });
+
+  test('throws when the item is not in the cart', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+
+    expect(() => cart.removeItem(1)).toThrow('não está no carrinho');
+  });
+});
