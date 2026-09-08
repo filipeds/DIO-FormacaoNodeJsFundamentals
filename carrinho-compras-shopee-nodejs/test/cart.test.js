@@ -71,3 +71,62 @@ describe('Cart - removeItem', () => {
     expect(() => cart.removeItem(1)).toThrow('não está no carrinho');
   });
 });
+
+describe('Cart - updateQuantity', () => {
+  test('increases quantity and reserves the extra stock', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+
+    cart.updateQuantity(1, 4);
+
+    expect(cart.items.get(1)).toBe(4);
+    expect(products[0].stock).toBe(1);
+  });
+
+  test('decreases quantity and returns the freed stock', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 4);
+
+    cart.updateQuantity(1, 1);
+
+    expect(cart.items.get(1)).toBe(1);
+    expect(products[0].stock).toBe(4);
+  });
+
+  test('setting quantity to 0 removes the item', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+
+    cart.updateQuantity(1, 0);
+
+    expect(cart.items.has(1)).toBe(false);
+    expect(products[0].stock).toBe(5);
+  });
+
+  test('throws when increasing beyond available stock', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+
+    expect(() => cart.updateQuantity(1, 10)).toThrow('Estoque insuficiente');
+    expect(cart.items.get(1)).toBe(2);
+  });
+
+  test('throws when the item is not in the cart', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+
+    expect(() => cart.updateQuantity(1, 2)).toThrow('não está no carrinho');
+  });
+
+  test('throws for a negative quantity', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+
+    expect(() => cart.updateQuantity(1, -1)).toThrow();
+  });
+});
