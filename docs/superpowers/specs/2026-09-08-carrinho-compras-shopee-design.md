@@ -75,6 +75,8 @@ carrinho-compras-shopee-nodejs/
   - `updateQuantity(productId, quantity)` — ajusta a quantidade do item para
     o valor absoluto informado, validando a diferença contra o estoque
     disponível; `quantity` 0 remove o item (equivalente a `removeItem`).
+    Lança erro se o item não estiver no carrinho ou se `quantity` for
+    negativo/não numérico.
   - `getItems()` — retorna a lista de itens do carrinho (produto, quantidade,
     subtotal).
   - `getTotal()` — soma de `preço × quantidade` de todos os itens.
@@ -126,7 +128,8 @@ entrada inválida do usuário.
   - `removeItem` remove o item e devolve o estoque; rejeita remoção de item
     ausente do carrinho.
   - `updateQuantity` ajusta a quantidade validando estoque disponível tanto
-    para aumento quanto para redução; quantidade 0 remove o item.
+    para aumento quanto para redução; quantidade 0 remove o item; rejeita
+    item ausente do carrinho e quantidade negativa/não numérica.
   - `getTotal` e `getItemCount` calculam corretamente com múltiplos itens e
     após operações de adicionar/remover/alterar.
 - `cli.js` e `index.js` não têm teste unitário direto (I/O de terminal
