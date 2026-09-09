@@ -172,4 +172,22 @@ describe('Cart - getItems/getTotal/getItemCount', () => {
     expect(cart.getTotal()).toBe(0);
     expect(cart.getItemCount()).toBe(0);
   });
+
+  test('getTotal and getItemCount reflect state after update and removal', () => {
+    const products = makeTestProducts();
+    const cart = new Cart(products);
+    cart.addItem(1, 2);
+    cart.addItem(2, 1);
+
+    cart.updateQuantity(1, 3);
+    cart.removeItem(2);
+
+    expect(cart.getItems()).toEqual([
+      { productId: 1, name: 'Produto A', price: 10, quantity: 3, subtotal: 30 },
+    ]);
+    expect(cart.getTotal()).toBe(30);
+    expect(cart.getItemCount()).toBe(3);
+    expect(products[0].stock).toBe(2);
+    expect(products[1].stock).toBe(2);
+  });
 });
