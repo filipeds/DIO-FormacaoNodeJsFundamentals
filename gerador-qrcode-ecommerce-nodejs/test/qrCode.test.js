@@ -39,3 +39,28 @@ describe('generateQrCodeFile', () => {
     ).rejects.toThrow('disk full');
   });
 });
+
+const { generateQrCodeTerminal } = require('../src/qrCode');
+
+describe('generateQrCodeTerminal', () => {
+  test('calls generate with the url and resolves with the ascii output', async () => {
+    const generate = jest.fn((url, options, callback) => {
+      callback('ASCII-QR-CODE');
+    });
+
+    const result = await generateQrCodeTerminal('https://example.com/produto', { generate });
+
+    expect(generate).toHaveBeenCalledWith('https://example.com/produto', { small: true }, expect.any(Function));
+    expect(result).toBe('ASCII-QR-CODE');
+  });
+
+  test('rejects with a descriptive error when generate produces no output', async () => {
+    const generate = jest.fn((url, options, callback) => {
+      callback(undefined);
+    });
+
+    await expect(generateQrCodeTerminal('https://example.com/produto', { generate })).rejects.toThrow(
+      'Não foi possível gerar o QR Code no terminal.'
+    );
+  });
+});
