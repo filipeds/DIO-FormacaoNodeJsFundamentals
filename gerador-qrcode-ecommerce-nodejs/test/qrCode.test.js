@@ -63,4 +63,10 @@ describe('generateQrCodeTerminal', () => {
       'Não foi possível gerar o QR Code no terminal.'
     );
   });
+
+  test('works against the real qrcode-terminal dependency by default', async () => {
+    const result = await generateQrCodeTerminal('https://example.com/produto');
+    expect(typeof result).toBe('string');
+    expect(result.length).toBeGreaterThan(0);
+  });
 });

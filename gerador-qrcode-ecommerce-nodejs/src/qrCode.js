@@ -18,7 +18,7 @@ async function generateQrCodeFile(url, fileName, deps = {}) {
 }
 
 function generateQrCodeTerminal(url, deps = {}) {
-  const generate = deps.generate || qrcodeTerminal.generate;
+  const generate = deps.generate || qrcodeTerminal.generate.bind(qrcodeTerminal);
 
   return new Promise((resolve, reject) => {
     generate(url, { small: true }, (qrCodeAscii) => {
