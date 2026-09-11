@@ -1,3 +1,12 @@
+const crypto = require('crypto');
+
+const CHARACTER_SETS = {
+  uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+  lowercase: 'abcdefghijklmnopqrstuvwxyz',
+  numbers: '0123456789',
+  specialCharacters: '!@#$%^&*()_+-=[]{}|;:,.<>?',
+};
+
 function parseBoolean(value) {
   return value === 'true';
 }
@@ -24,4 +33,23 @@ function loadPasswordConfig(env = process.env) {
   return config;
 }
 
-module.exports = { loadPasswordConfig };
+function buildAlphabet(config) {
+  return Object.keys(CHARACTER_SETS)
+    .filter((key) => config[key])
+    .map((key) => CHARACTER_SETS[key])
+    .join('');
+}
+
+function generatePassword(config, randomInt = crypto.randomInt) {
+  const alphabet = buildAlphabet(config);
+
+  let password = '';
+  for (let i = 0; i < config.length; i++) {
+    const index = randomInt(alphabet.length);
+    password += alphabet[index];
+  }
+
+  return password;
+}
+
+module.exports = { loadPasswordConfig, generatePassword };
