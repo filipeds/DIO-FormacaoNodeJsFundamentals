@@ -44,6 +44,8 @@ npm test
 
 Formato de `Episode`: `{ podcastName, title, videoId, cover, link, categories: string[] }`.
 
+Observação: `?podcast=` com valor vazio retorna todos os episódios.
+
 ### Exemplos
 
 ```bash
