@@ -1,0 +1,35 @@
+{
+  "name": "api-champions-league-express",
+  "version": "1.0.0",
+  "description": "API REST da Champions League com Node.js, TypeScript e Express",
+  "main": "dist/server.js",
+  "private": true,
+  "scripts": {
+    "dist": "tsup src",
+    "start:dev": "tsx --env-file=.env src/server.ts",
+    "start:watch": "tsx watch --env-file=.env src/server.ts",
+    "start:dist": "npm run dist && node --env-file=.env dist/server.js",
+    "test": "jest"
+  },
+  "keywords": ["nodejs", "express", "typescript", "champions-league", "api"],
+  "author": "Filipe",
+  "license": "ISC",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.30",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.1.2",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3"
+  }
+}
