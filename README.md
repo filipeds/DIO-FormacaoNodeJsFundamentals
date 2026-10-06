@@ -8,11 +8,11 @@ Cada desafio é um projeto Node.js independente, executado no terminal, com sua 
 
 | # | Desafio | Pasta | PR |
 |---|---|---|---|
-| 1 | Simulador de Corridas Mario Kart | [`mario-kart-race-simulator/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/feat/simulador-corridas-mario-kart/mario-kart-race-simulator) | [#6](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/6) |
-| 2 | Carrinho de Compras Shopee | [`carrinho-compras-shopee-nodejs/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/feat/carrinho-compras-shopee-nodejs/carrinho-compras-shopee-nodejs) | [#7](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/7) |
-| 3 | Gerador de QR Codes para E-commerce | [`gerador-qrcode-ecommerce-nodejs/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/feat/gerador-qrcode-ecommerce-nodejs/gerador-qrcode-ecommerce-nodejs) | [#8](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/8) |
-| 4 | Gerenciador de Podcasts (API Node + TypeScript) | [`gerenciador-podcasts-nodejs-ts/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/feat/gerenciador-podcasts-nodejs-ts/gerenciador-podcasts-nodejs-ts) | [#4](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/4) |
-| 5 | API de Fórmula 1 (Node + Fastify) | [`api-formula-1-fastify/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/feat/api-formula-1-fastify/api-formula-1-fastify) | [#5](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/5) |
+| 1 | Simulador de Corridas Mario Kart | [`mario-kart-race-simulator/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/main/mario-kart-race-simulator) | [#6](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/6) |
+| 2 | Carrinho de Compras Shopee | [`carrinho-compras-shopee-nodejs/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/main/carrinho-compras-shopee-nodejs) | [#7](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/7) |
+| 3 | Gerador de QR Codes para E-commerce | [`gerador-qrcode-ecommerce-nodejs/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/main/gerador-qrcode-ecommerce-nodejs) | [#8](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/8) |
+| 4 | Gerenciador de Podcasts (API Node + TypeScript) | [`gerenciador-podcasts-nodejs-ts/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/main/gerenciador-podcasts-nodejs-ts) | [#4](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/4) |
+| 5 | API de Fórmula 1 (Node + Fastify) | [`api-formula-1-fastify/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/main/api-formula-1-fastify) | [#5](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/5) |
 | 6 | API da Champions League (Node + Express) | [`api-champions-league-express/`](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/tree/main/api-champions-league-express) | [#9](https://github.com/filipeds/DIO-FormacaoNodeJsFundamentals/pull/9) |
 
-Cada linha da tabela leva à pasta do projeto (os desafios 1 a 5 apontam para a branch onde foram desenvolvidos, pois seus PRs ainda estão abertos; o desafio 6 já está na `main`). Veja o `README.md` de cada pasta para detalhes de como rodar e testar.
+Cada linha da tabela leva à pasta do projeto na `main`; todos os PRs já foram integrados. Veja o `README.md` de cada pasta para detalhes de como rodar e testar.
