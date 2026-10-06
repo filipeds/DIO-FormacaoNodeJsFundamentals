@@ -1,0 +1,10 @@
+[
+  { "id": 1, "name": "Real Madrid", "country": "Espanha" },
+  { "id": 2, "name": "Manchester City", "country": "Inglaterra" },
+  { "id": 3, "name": "Bayern de Munique", "country": "Alemanha" },
+  { "id": 4, "name": "Paris Saint-Germain", "country": "França" },
+  { "id": 5, "name": "Barcelona", "country": "Espanha" },
+  { "id": 6, "name": "Inter de Milão", "country": "Itália" },
+  { "id": 7, "name": "Liverpool", "country": "Inglaterra" },
+  { "id": 8, "name": "Arsenal", "country": "Inglaterra" }
+]

@@ -1,0 +1,15 @@
+[
+  { "id": 1, "name": "Vinícius Júnior", "position": "Atacante", "clubId": 1 },
+  { "id": 2, "name": "Jude Bellingham", "position": "Meia", "clubId": 1 },
+  { "id": 3, "name": "Erling Haaland", "position": "Atacante", "clubId": 2 },
+  { "id": 4, "name": "Phil Foden", "position": "Meia", "clubId": 2 },
+  { "id": 5, "name": "Harry Kane", "position": "Atacante", "clubId": 3 },
+  { "id": 6, "name": "Jamal Musiala", "position": "Meia", "clubId": 3 },
+  { "id": 7, "name": "Ousmane Dembélé", "position": "Atacante", "clubId": 4 },
+  { "id": 8, "name": "Vitinha", "position": "Meio-campista", "clubId": 4 },
+  { "id": 9, "name": "Lamine Yamal", "position": "Atacante", "clubId": 5 },
+  { "id": 10, "name": "Raphinha", "position": "Atacante", "clubId": 5 },
+  { "id": 11, "name": "Lautaro Martínez", "position": "Atacante", "clubId": 6 },
+  { "id": 12, "name": "Mohamed Salah", "position": "Atacante", "clubId": 7 },
+  { "id": 13, "name": "Bukayo Saka", "position": "Atacante", "clubId": 8 }
+]
